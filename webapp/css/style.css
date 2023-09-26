@@ -1,0 +1,46 @@
+.label {
+    color: #0d9669;
+}
+
+.labelForTitle {
+    color: #0d9669;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.coloredVerticalLayout{
+    background-image:linear-gradient(to bottom, #d9f8fb, #dcf8c1);
+    display: flex;
+    align-items: center; /* Vertical alignment */
+    justify-content: center; /* Horizontal alignment */
+};
+
+.verticalLayout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zoomed-out-content {
+    transform: scale(0.8); /* Adjust the scale factor as needed */
+    transform-origin: top left; /* You can adjust the origin point if needed */
+}
+
+.coloredToolBar{
+    background-color: #dcf8c1;
+}
+
+.custom-menu-button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0 8px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: transparent;
+    color: #333; /* Set the desired color */
+}
+
+.custom-menu-button:hover {
+    background-color: #eee; /* Set the desired hover color */
+}

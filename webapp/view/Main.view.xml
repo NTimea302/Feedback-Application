@@ -1,0 +1,216 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout"
+    xmlns:tnt="sap.tnt"
+    xmlns:l="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table.Table"
+    xmlns:unified="sap.ui.unified" class="sapUiSizeCompact"
+    controllerName="FeedbackApp.controller.Main" displayBlock="true">
+                <ObjectHeader 
+                    id="idHeaderOH" 
+                    responsive="true" 
+                    fullScreenOptimized="true" 
+                    title="{Name}" 
+                    intro="{path: 'Career_level', formatter: '.formatToCamelCase'}"
+                    backgroundDesign="Translucent" 
+                    icon="sap-icon://employee" 
+                    iconDensityAware="false" 
+                    iconActive="true"
+                    iconTooltip="Options"
+                    iconPress="onIconClick"
+                    imageShape="Circle"  
+                    class="sapUiResponsivePadding--header">
+                    
+                     <attributes >
+                        <ObjectAttribute id="myPNR" text="{i18n>pnrObjAttrTxt} {PNR}" textDirection="RTL"/>
+                        <ObjectAttribute text="{i18n>emailAddressObjAttrTxt} {Email}" textDirection="RTL"/>
+                    </attributes>
+
+                    <headerContainer>
+                        <IconTabBar id="idTab" upperCase="true">     
+                        <items >
+                        <IconTabFilter 
+                            iconColor="Positive"
+                            text="{i18n>PEG}"
+                            key="key1">
+                            <l:VerticalLayout>
+                                <l:content >
+                                <ScrollContainer height="30rem" vertical="true">
+                                <Table id="idPEGTable" 
+                                       items='{EmployeeToPeg}'
+                                       sticky="HeaderToolbar,InfoToolbar,ColumnHeaders"
+                                        >
+                                    <headerToolbar>
+                                        <OverflowToolbar  >
+                                            <content>
+                                                <Title text="{i18n>myPEG}" level="H1"/>
+                                                <ToolbarSpacer />
+
+                                                <SearchField
+                                                    id="idSearchField"
+                                                    width="20%"
+                                                    placeholder="Search for..."
+                                                    enableSuggestions="true"
+                                                    change=".onSearch"/>
+
+                                                <Label text="{i18n>statusFilter}" />
+                                                 <Select
+                                                    id="idSelect"
+                                                    enabled="true"
+                                                    editable="true"
+                                                    forceSelection="false"
+                                                    change=".onSearch">
+                                                    <core:Item key="" text="{i18n>all}" />
+                                                    <core:Item key="COMPLETE" text="{i18n>complete}" />
+                                                    <core:Item key="PENDING" text="{i18n>pending}" />
+                                                </Select>
+                                                <Button icon="sap-icon://request" 
+                                                        visible="{=${Career_level} === 'MANAGER' ? false : true}"
+                                                        id="btnNewPEG" 
+                                                        text="{i18n>requestPEG}" 
+                                                        type="Accept"
+                                                        press=".onRequestPEG"/>
+                                            </content>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                        <columns>
+                                            <Column
+                                                minScreenWidth="Desktop"
+                                                demandPopin="true"
+                                                hAlign="Begin">
+                                                <Text text="Project" />
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Desktop"
+                                                demandPopin="true"
+                                                hAlign="Begin"
+                                                visible="{=${Career_level} === 'MANAGER' ? true : false}">
+                                                <Text text="Requester"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Desktop"
+                                                demandPopin="true"
+                                                hAlign="Begin"
+                                                visible="{=${Career_level} === 'MANAGER' ? false : true}">
+                                                <Text text="Evaluator"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Desktop"
+                                                demandPopin="true"
+                                                hAlign="Begin">
+                                                <Text text="Grade" />
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Desktop"
+                                                demandPopin="true"
+                                                hAlign="Begin">
+                                                <Text text="Status" />
+                                            </Column>                                    
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem vAlign="Middle" type="Navigation" press="onPressPEGItem">
+                                                <cells>
+                                                    <Text
+                                                        text="{path: 'Project_name', formatter: '.formatToCamelCase'}"/>
+                                                     <Text
+                                                        text="{path: 'Name_employee', formatter: '.formatToCamelCase'}"/>
+                                                    <Text
+                                                        text="{path: 'Name_evaluator', formatter: '.formatToCamelCase'}"/>
+                                                    <Text
+                                                        text="{Grade}" />
+                                                    <ObjectStatus 
+                                                        state="{= ${Status} === 'PENDING' ? 'Warning' : 'Success'}"
+                                                        text="{path: 'Status', formatter: '.formatToCamelCase'}" />                                                 
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                 </ScrollContainer>
+                                </l:content>
+                            </l:VerticalLayout>
+                        </IconTabFilter>
+                        <IconTabFilter
+                            iconColor="Positive"
+                            text="{i18n>360Feedback}"
+                            key="key2">
+                            <l:VerticalLayout width="100%">
+                                <l:content>
+                                <ScrollContainer height="30rem" vertical="true">
+                                
+                                <Table id="idFeedbackTable"                                
+                                       items="{EmployeeToFeedback}"
+                                       sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
+                                    <headerToolbar>
+                                        <OverflowToolbar >
+                                            <content>
+                                                <Title text="{i18n>myFeedbacks}" level="H1"/>
+                                                <ToolbarSpacer />
+                                                <SearchField
+                                                    id="idSearchFieldFeedback"
+                                                    width="20%"
+                                                    placeholder="Search for..."
+                                                    enableSuggestions="true"
+                                                    change=".onSearchFeedback"/>
+                                                <Label text="{i18n>filter}" />
+                                                <Select
+                                                    id = "idSelect1"
+                                                    selectedKey="all"
+                                                    enabled="true"
+                                                    editable="true"
+                                                    forceSelection="false"
+                                                    change=".onSearchFeedback">
+                                                    <core:Item key="" text="{i18n>all}" />
+                                                    <core:Item key="SENT" text="{i18n>sent}" />
+                                                    <core:Item key="RECEIVED" text="{i18n>received}" />
+                                                </Select>
+                                                <Button icon="sap-icon://request" 
+                                                    id="btnSendFeedback" 
+                                                    text="{i18n>sendFeedbackBtn}" 
+                                                    type="Accept"
+                                                    press=".onSendFeedback"/>
+                                            </content>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                        <columns>
+                                            <Column
+                                                minScreenWidth="Desktop"
+                                                hAlign="Begin">
+                                                <Text text="{i18n>sender}" />
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Desktop"
+                                                demandPopin="true"
+                                                hAlign="Begin">
+                                                <Text text="{i18n>receiver}" />
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Desktop"
+                                                demandPopin="true"
+                                                hAlign="Begin">
+                                                <Text text="{i18n>grade}" />
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem vAlign="Middle" type="Navigation" press="onPressFeedbackItem">
+                                                <cells>
+                                                    <Text
+                                                        text="{=${Anonimity} === true ?  'Anonymous' : ${path: 'Name_sender', formatter: '.formatToCamelCase'}}"/>
+                                                    <Text
+                                                        text="{path: 'Name_reciever',  formatter: '.formatToCamelCase'}"/>
+                                                    <Text
+                                                        text="{path: 'Or_feedback', formatter: '.formatToCamelCase'}" />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </ScrollContainer>
+                                </l:content>
+                            </l:VerticalLayout>
+                        </IconTabFilter>
+                        </items>
+                    </IconTabBar>
+                    </headerContainer>
+                </ObjectHeader>
+</mvc:View>

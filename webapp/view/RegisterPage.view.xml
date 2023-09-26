@@ -1,0 +1,72 @@
+<mvc:View  
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns="sap.m" 
+xmlns:form="sap.ui.layout.form" 
+xmlns:l="sap.ui.layout"
+controllerName="FeedbackApp.controller.RegisterPage"
+displayBlock="true">
+		<VBox width="100%" height="100%" alignItems="Center" alignContent="Center" class="coloredVerticalLayout">
+			<Panel width="100%" height="100%" class="verticalLayout">
+				<VBox width="100%" height="100%" alignItems="Center" alignContent="Center">
+				    <Label text=""/>
+					<Label text=""/>
+				    <Label class="labelForTitle" text="{i18n>registerTitle}"/>
+					<form:SimpleForm id="formRegister" layout="ResponsiveLayout" editable="true">
+						<form:content>
+	
+                            <Label class="label" text="{i18n>nameLbl}" required="true"/>
+							<Input class="input" 
+							       id="idName" 
+								   value="{registerModel>/inputName}"
+								   placeholder="{i18n>enterName}" 
+								   liveChange="onInputChanged" 
+								   submit="onRegisterClick"/>
+            
+							<Label class="label" text="{i18n>objAttrEmail}" required="true"/>
+							<Input class="input" 
+							       id="idEmail" 
+								   value="{registerModel>/inputEmail}"
+								   placeholder="{i18n>enterMail}" 
+								   liveChange="onInputChanged" 
+								   submit="onRegisterClick"/>
+                   
+                            <Label class="label" text="{i18n>passw}" required="true"/>
+							<Input class="input" 
+							       id="idPassword" 
+								   type="Password" 
+								   value="{registerModel>/inputPassword}"
+								   placeholder="{i18n>enterPass}" 
+								   liveChange="onInputChanged" 
+								   submit="onRegisterClick"/>
+                        
+							<Label class="label" text="{i18n>confirmPass}" required="true"/>
+							<Input class="input" 
+							       id="idConfirmPassword" 
+								   type="Password" 
+								   value="{registerModel>/inputConfirmPassword}"
+								   placeholder="{i18n>enterPassAgain}" 
+								   liveChange="onInputChanged" 
+								   submit="onRegisterClick"/>
+                        
+						</form:content>
+						
+						<Label text=""/>
+						<Label text=""/>
+						
+						<Button icon="sap-icon://add-employee"
+						        id="btnRegister" 
+								text="{i18n>register}" 
+								type="Accept" 
+								enabled="{registerModel>/isRegisterEnabled}"
+								press="onRegisterClick"/>
+						<Button
+								text="Back"
+								icon="sap-icon://nav-back"
+								type="Attention"
+								press="onNavBackReg"/>
+						<Label text=""/>
+					</form:SimpleForm>
+				</VBox>
+			</Panel>
+		</VBox>
+</mvc:View>

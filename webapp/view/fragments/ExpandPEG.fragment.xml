@@ -1,0 +1,130 @@
+<core:FragmentDefinition xmlns:smartform="sap.ui.comp.smartform" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+   <Dialog
+      contentWidth="70rem"
+      id="idExpandPEG"
+      title="{i18n>expPegTitle}">
+
+      <f:SimpleForm 
+         id="idFormExpandPEGTop"
+         editable="true"
+         layout="ColumnLayout"         
+         columnsM="2"
+         columnsL="3"
+         columnsXL="4">
+         <f:content>			
+               <Label text="{i18n>employeeName}"/>
+               <Input width="65%" id="idNameFragmentExp" value="{path: 'Name_employee', formatter: '.formatToCamelCase'}" enabled="false"/>
+
+               <Label text="{i18n>employeePNR}"/>
+               <Input width="65%" id="idPNRFragmentExp" value="{Pnr_employee}" enabled="false"/>
+
+               <Label text="{i18n>careerLevel}"/>
+               <Input width="65%" id="idCarrLevFragmentExp" value="{path: 'Career_level', formatter:  '.formatToCamelCase'}" enabled="false"/>
+
+               <Label text="{i18n>year}"/>
+               <Input width="65%" value="{i18n>currYear}" enabled="false"/>
+
+               <Label text="{i18n>businessArea}"/>
+               <Input id="idInputBusinessAreaExp" 
+                  enabled="{=${userModel>/careerLevel}==='MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}"
+                  value="{Business_area}"
+                  liveChange="onInputRequestChanged"
+                  placeholder="{i18n>enterBA}"
+                  width="65%"/>
+
+               <Label text="{i18n>evaluatorName}"/>
+               <Input id="idInputNameEvaluatorExp" 
+                     value="{path: 'Name_evaluator', formatter:  '.formatToCamelCase'}"
+                     enabled="false"
+                     placeholder="{i18n>enterEN}" 
+                     liveChange="onInputRequestChanged"
+                     width="65%"
+             />
+
+               <Label text="{i18n>projectID}"/>
+               <Input id="idInputProjectIdExp" 
+                  enabled="{=${userModel>/careerLevel}==='MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}"
+                  value="{Id_project}"
+                  liveChange="onInputRequestChanged"
+                  placeholder="{i18n>enterPID}"
+                  width="65%"
+                 />
+
+               <Label text="{i18n>projectName}"/>
+               <Input id="idInputProjectNameExp" 
+                  enabled="{=${userModel>/careerLevel}==='MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}"
+                  value="{path: 'Project_name', formatter:  '.formatToCamelCase'}"
+                  liveChange="onInputRequestChanged"
+                  placeholder="{i18n>enterPN}" 
+                  width="65%"
+               />
+
+               <Label text="{i18n>projectDays}"/>
+               <Input id="idInputProjectDaysExp" 
+                     enabled="{=${userModel>/careerLevel}==='MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}"
+                     value="{Project_days}"
+                     liveChange="onInputRequestChanged"
+                     placeholder="{i18n>enterPD}" width="65%" />
+               <Label id="idIDPEG" text="{Id_peg}" visible="false"></Label>
+            </f:content>
+		</f:SimpleForm>
+
+      <f:SimpleForm 
+         id="idFormExpandPEGBottom"
+         editable="true"
+         layout="ColumnLayout"         
+         columnsM="2"
+         columnsL="2"
+         columnsXL="2">
+			<f:content>
+               <Label text="{i18n>expertise}" />                  
+               <RatingIndicator id="idRatingExpertiseExp" enabled="{=${userModel>/careerLevel}==='MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}" maxValue="5" class="sapUiSmallMargin" iconSize="24px" tooltip="{i18n>expertiseSkills}" value="{Expertise_Skills}"/>
+               <TextArea id="idExpertiseDetailsTA" rows="3" width="100%" placeholder="Enter details about Expertise" enabled="{=${userModel>/careerLevel} === 'MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}" value="{path: 'Expertise_Details', formatter:  '.formatToCamelCase'}"/>
+               
+               <Label text="{i18n>networking}"/>
+               <RatingIndicator id="idRatingNetworkingExp" enabled="{=${userModel>/careerLevel}==='MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}" maxValue="5" class="sapUiSmallMargin" iconSize="24px" tooltip="{i18n>networkingSkills}" value="{Network_skills}"/>
+               <TextArea enabled="{=${userModel>/careerLevel} === 'MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}" id="idNetworkDetailsTA" rows="3" width="100%" placeholder="Enter details about Networking" value="{path: 'Network_details', formatter:  '.formatToCamelCase'}"/>
+               
+               <Label text="{i18n>teamPlayer}"/>
+               <RatingIndicator id="idRatingTeamingExp" enabled="{=${userModel>/careerLevel}==='MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}" maxValue="5" class="sapUiSmallMargin" iconSize="24px" tooltip="{i18n>teamPlayerSkills}" value="{Teaming_skills}"/>
+               <TextArea enabled="{=${userModel>/careerLevel} === 'MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}" id="idTeamingDetailsTA" rows="3" width="100%" placeholder="Enter details about Teamwork" value="{path: 'Teaming_details', formatter:  '.formatToCamelCase'}"/>
+
+               <Label text="{i18n>passion}"/>
+               <RatingIndicator id="idRatingPassionExp" enabled="{=${userModel>/careerLevel}==='MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}" maxValue="5" class="sapUiSmallMargin" iconSize="24px" tooltip="{i18n>passionSkills}" value="{Passion_skills}"/>
+               <TextArea enabled="{=${userModel>/careerLevel} === 'MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}" id="idPassionDetailsTA" rows="3" width="100%" placeholder="Enter details about Passion" value="{path: 'Passion_details', formatter:  '.formatToCamelCase'}"/>
+
+               <Label text="{i18n>autonomy}"/>
+               <RatingIndicator id="idRatingAutonomyExp" enabled="{=${userModel>/careerLevel}==='MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}" maxValue="5" class="sapUiSmallMargin" iconSize="24px" tooltip="{i18n>autonomySkills}" value="{Autonomy_skills}"/>
+               <TextArea enabled="{=${userModel>/careerLevel} === 'MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}" id="idAutonomyDetailsTA" rows="3" width="100%" placeholder="Enter details about Autonomy" value="{path: 'Autonomy_details', formatter:  '.formatToCamelCase'}"/>
+
+               <Label text="{i18n>average}"/>
+               <Text id="idRatingAverageExp" text="{=0.125 * ${Autonomy_skills} + 0.125 * ${Passion_skills} + 0.125 * ${Teaming_skills} + 0.125 * ${Network_skills} + 0.5 * ${Expertise_Skills}}"/>
+			        <Button
+                  text="Export to excel"
+                  icon="sap-icon://excel-attachment"
+                  type="Accept"
+                  width="100%"
+                  press=".getExcel"
+                  enabled="{=${Status} === 'COMPLETE' ? true : false}"/>      
+           </f:content>
+		</f:SimpleForm>
+         
+      <beginButton>
+         <Button
+            width="9rem"
+            text="Done"
+            icon="sap-icon://accept"
+            type="Accept"
+            visible="{=${userModel>/careerLevel} === 'MANAGER' &amp;&amp; ${Status}==='PENDING' ? true : false}"
+            press=".onDonePEGBtnExp"/> 
+      </beginButton>
+      <endButton>
+         <Button
+            width="9rem"
+            text="{=${Career_Level}==='MANAGER' ? 'Cancel' : 'Back'}"
+            icon="{=${Career_Level}==='MANAGER' ? 'sap-icon://reset' : 'sap-icon://nav-back'}"
+            type="{=${Career_Level}==='MANAGER' ? 'Reject' : 'Attention'}"
+            press=".onCancelPEGBtnExp"/>
+      </endButton> 
+   </Dialog>
+</core:FragmentDefinition>

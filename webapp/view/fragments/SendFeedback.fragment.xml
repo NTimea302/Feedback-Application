@@ -1,0 +1,74 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+   <Dialog 
+      contentWidth="31rem"
+      id="idSendFeedback"
+      title="{i18n>sendFeedbackTitle}">
+      <f:SimpleForm id="idSendFdbck" editable="true">
+         <VBox width="100%" alignContent="Stretch" alignItems="Stretch">
+            <HBox >
+               <Label text="{i18n>userLabel}" class="sapUiSmallMargin"/>
+               <Text id="idUserName" text="{path: 'Name', formatter: '.formatToCamelCase'}" class="sapUiTinyMarginTop"/>
+            </HBox >
+           
+            <HBox>
+               <Label text="{i18n>employeeLabel}" class="sapUiSmallMargin" required="true"/>
+               <ComboBox 
+                  id="idComboBoxFeedback" 
+                  items="{
+                     path: '/EmployeeSet',
+                     sorter: {
+                        path: 'Name',
+                        descending: 'false'
+                        }
+                     }" 
+                     width="20rem" 
+                     enabled="true" 
+                     editable="true"  
+                     class="sapUiTinyMargin"
+                     placeholder="Select employee"
+                     selectionChange="onInputSendFeedbackChanged"
+                     > 
+                  <items>
+                      <core:Item key="{PNR}" text="{path: 'Name', formatter: '.formatToCamelCase'}"/>
+                  </items>
+               </ComboBox>
+            </HBox>
+            
+            <CheckBox id="idAnonimity" text="{i18n>annonim}" class="sapUiTinyMargin"/> 
+         
+            <Label text="{i18n>softSkills}" class="sapUiSmallMarginTop"/>
+            <HBox>
+               <RatingIndicator id="ratingSoft" maxValue="5" class="sapUiSmallMargin" iconSize="24px" tooltip="{i18n>softSkills}" />
+               <TextArea id="idSoftTA" width="18rem" placeholder="Enter details about Soft Skills"></TextArea>
+            </HBox>
+            <Label text="{i18n>techSkills}"/>
+            <HBox>
+               <RatingIndicator id="ratingTech" maxValue="5" class="sapUiSmallMargin" iconSize="24px" tooltip="{i18n>techSkills}" />
+               <TextArea id="idHardTA" width="18rem" placeholder="Enter details about Technical Skills"></TextArea>
+            </HBox>
+            <Label text="{i18n>otherSkills}"/>
+            <HBox>
+               <RatingIndicator id="ratingOther" maxValue="5" class="sapUiSmallMargin" iconSize="24px" tooltip="{i18n>otherSkills}" />
+               <TextArea id="idOtherTA" width="18rem" placeholder="{i18n>additionalDetails}"></TextArea>
+            </HBox>
+         </VBox>
+      </f:SimpleForm>
+      <beginButton>
+         <Button
+            width="13.5rem"
+            text="{i18n>sendBtn}"
+            icon="sap-icon://accept"
+            type="Accept"
+            press=".onSendFeedbackBtn"
+            enabled="{feedbackModel>/isSendEnabled}"/>
+      </beginButton>
+      <endButton>
+         <Button
+            width="13.5rem"
+            text="{i18n>cancelBtn}"
+            icon="sap-icon://reset"
+            type="Reject"
+            press=".onCancelSendFeedbackBtn"/>
+      </endButton>
+   </Dialog>
+</core:FragmentDefinition>

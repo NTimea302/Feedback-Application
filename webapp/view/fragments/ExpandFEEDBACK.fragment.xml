@@ -1,0 +1,51 @@
+<core:FragmentDefinition xmlns:smartform="sap.ui.comp.smartform" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+   <Dialog
+      contentWidth="24rem"
+      id="idExpandFeedbackExp"
+      title="{i18n>viewFeedbackTitle}">
+      <f:SimpleForm id="idSendFdbckExp" editable="true">
+         <VBox width="100%" alignContent="Stretch" alignItems="Stretch">
+            <VBox alignContent="Center" alignItems="Center">
+               <HBox >
+                  <Label text="Receiver: " class="sapUiTinyMargin"/> 
+                  <Text text="{path: 'Name_reciever', formatter: '.formatToCamelCase'}" />
+               </HBox>
+               <HBox>
+                  <Label text="Sender: " class="sapUiTinyMargin"/> 
+                  <Text text="{=${Anonimity} === true ?  'Anonymous' : ${path: 'Name_sender', formatter: '.formatToCamelCase'}}"/>
+               </HBox>   
+            </VBox>     
+            <Label text="{i18n>softSkills}" class="sapUiTinyMargin" />
+            <HBox >
+               <RatingIndicator id="ratingSoftExp" maxValue="5" class="sapUiTinyMargin" iconSize="2rem" tooltip="{i18n>softSkills}" value="{Soft_skills}" enabled="false"/>
+               <Text id="idSoftTAExp" width="10rem" text="{Soft_details}" class="sapUiTinyMargin" maxLines="2" tooltip="{Soft_details}"></Text>
+            </HBox>
+           <Label text="{i18n>techSkills}" class="sapUiTinyMargin"/>
+            <HBox> 
+               <RatingIndicator id="ratingTechExp" maxValue="5" class="sapUiTinyMargin" iconSize="2rem" tooltip="{i18n>techSkills}" value="{Hard_skills}" enabled="false"/>
+               <Text id="idHardTAExp" width="10rem" text="{Hard_details}" class="sapUiTinyMargin" maxLines="2" tooltip="{Hard_details}"></Text>
+            </HBox>
+            <Label text="{i18n>otherSkills}" class="sapUiTinyMargin"/>
+            <HBox>
+               <RatingIndicator id="ratingOtherExp" maxValue="5" class="sapUiTinyMargin" iconSize="2rem" tooltip="{i18n>otherSkills}" value="{Other_skills}" enabled="false"/>
+               <Text id="idOtherTAExp" width="10rem" text="{Other_details}" class="sapUiTinyMargin" maxLines="2" tooltip="{Other_details}"></Text>
+            </HBox>
+            <VBox alignContent="Center" alignItems="Center">
+               <HBox >
+                  <Label text="Overall rating: " class="sapUiSmallMarginTop"></Label>
+                  <Text text="{Or_feedback}" class="sapUiTinyMargin"></Text>
+               </HBox>
+            </VBox>
+         </VBox>
+      </f:SimpleForm>
+         
+      <endButton>
+         <Button
+            width="9rem"
+            text="Back"
+            icon="sap-icon://nav-back"
+            type="Attention"
+            press=".onCancelFeedbackBtnExp"/>
+      </endButton> 
+   </Dialog>
+</core:FragmentDefinition>

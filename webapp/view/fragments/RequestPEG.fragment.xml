@@ -1,0 +1,153 @@
+<core:FragmentDefinition xmlns:smartform="sap.ui.comp.smartform" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+   <Dialog
+      contentWidth="50REM"
+      id="idRequestPEG"
+      title="{i18n>requestPegTitle}">
+   <HBox>
+      <Table width="27REM" class="sapUiSmallMargin">
+         <columns>
+            <Column
+               width="50%"
+               demandPopin="true"
+               hAlign="Begin">
+            </Column>
+            <Column
+               width="50%"
+               demandPopin="true"
+               hAlign="Begin">
+            </Column>
+         </columns>
+         <items>
+            <ColumnListItem >
+                  <Label text="{i18n>employeeName}"/>
+                  <Label id="idNameFragmentReq" text="{path: 'Name', formatter:  '.formatToCamelCase'}"/>
+            </ColumnListItem>
+             <ColumnListItem >
+                  <Label text="{i18n>employeePNR}"/>
+                  <Label id="idPNRFragmentReq" text="{PNR}"/>
+            </ColumnListItem>
+            <ColumnListItem >
+                  <Label text="{i18n>careerLevel}"/>
+                  <Label id="idCarrLevFragmentReq" text="{path: 'Career_level', formatter:  '.formatToCamelCase'}"/>
+            </ColumnListItem>
+            <ColumnListItem >
+                  <Label text="{i18n>year}"/>
+                  <Label text="{i18n>currYear}"/>
+            </ColumnListItem>
+             <ColumnListItem >
+                  <Label text="{i18n>businessArea}" required="true"/>
+                  <Input id="idInputBusinessAreaReq" 
+                    enabled="true"
+                    value="{PEGModel>/inputBusinessArea}"
+                    liveChange="onInputRequestChanged"
+                    placeholder="{i18n>enterBA}"/>
+            </ColumnListItem>
+            <ColumnListItem >
+                  <Label text="{i18n>projectID}" required="true"/>
+                  <Input id="idInputProjectIdReq" 
+                     enabled="true"
+                     value="{PEGModel>/inputProjectId}"
+                     liveChange="onInputRequestChanged"
+                     placeholder="{i18n>enterPID}"/>
+            </ColumnListItem>
+            <ColumnListItem >
+                  <Label text="{i18n>projectName}" required="true"/>
+                  <Input id="idInputProjectNameReq" 
+                     enabled="true"
+                     value="{PEGModel>/inputProjectName}"
+                     liveChange="onInputRequestChanged"
+                     placeholder="{i18n>enterPN}"/>
+            </ColumnListItem>
+            <ColumnListItem >
+                  <Label text="{i18n>projectDays}" required="true"/>
+                  <Input id="idInputProjectDaysReq" 
+                      enabled="true"
+                      value="{PEGModel>/inputProjectDays}"
+                      liveChange="onInputRequestChanged"
+                      placeholder="{i18n>enterPD}" />
+            </ColumnListItem>
+            <ColumnListItem >
+                  <Label text="{i18n>evaluatorName}" required="true"/>
+                  <ComboBox  
+                  id="idInputNameEvaluatorReq" 
+                  items="{
+                     path: '/EmployeeSet',
+                     sorter: {
+                        path: 'Name',
+                        descending: 'false'
+                        },
+                     filters: [{ 
+                        path: 'Career_level',
+                        operator: 'EQ', 
+                        value1: 'MANAGER' 
+                        }]
+                     }" 
+                     width="100%" 
+                     enabled="true" 
+                     editable="true"  
+                     value="{PEGModel>/inputNameEvaluator}"
+                     placeholder="Select evaluator"
+                     selectionChange="onInputRequestChanged"> 
+                  <items>
+                      <core:Item key="{PNR}" text="{path: 'Name', formatter: '.formatToCamelCase'}"/>
+                  </items>
+                  </ComboBox>
+            </ColumnListItem>
+         </items>
+      </Table>
+      <Table width="17REM" class="sapUiSmallMargin">
+         <columns>
+            <Column
+               width="6REM"
+               demandPopin="true"
+               hAlign="Begin">
+            </Column>
+            <Column
+               width="10REM"
+               demandPopin="true"
+               hAlign="Center">
+            </Column>
+         </columns>
+         <items>
+             <ColumnListItem >
+                  <Label text="{i18n>expertise}" />                  
+                  <RatingIndicator id="idRatingExpertiseReq" maxValue="5" class="sapUiSmallMargin" iconSize="24px" tooltip="{i18n>expertiseSkills}" />
+            </ColumnListItem>
+             <ColumnListItem >
+                  <Label text="{i18n>networking}"/>
+                  <RatingIndicator id="idRatingNetworkingReq" maxValue="5" class="sapUiSmallMargin" iconSize="25px" tooltip="{i18n>networkingSkills}" />
+            </ColumnListItem>
+             <ColumnListItem >
+                  <Label text="{i18n>teamPlayer}"/>
+                  <RatingIndicator id="idRatingTeamingReq" maxValue="5" class="sapUiSmallMargin" iconSize="25px" tooltip="{i18n>teamPlayerSkills}" />
+            </ColumnListItem>
+             <ColumnListItem >
+                  <Label text="{i18n>passion}"/>
+                  <RatingIndicator id="idRatingPassionReq" maxValue="5" class="sapUiSmallMargin" iconSize="25px" tooltip="{i18n>passionSkills}" />
+            </ColumnListItem>
+             <ColumnListItem >
+                  <Label text="{i18n>autonomy}"/>
+                  <RatingIndicator id="idRatingAutonomyReq" maxValue="5" class="sapUiSmallMargin" iconSize="24px" tooltip="{i18n>autonomySkills}" />
+            </ColumnListItem>
+         </items>
+      </Table>
+      </HBox>
+      <beginButton>
+         <Button
+            width="9rem"
+            text="{i18n>request}"
+            icon="sap-icon://accept"
+            type="Accept"
+            enabled="{PEGModel>/isRequestEnabled}"
+            press=".onDonePEGBtnReq"/> 
+      </beginButton>
+      <endButton>
+         <Button
+            width="9rem"
+            text="{i18n>cancel}"
+            icon="sap-icon://reset"
+            type="Reject"
+            press=".onCancelPEGBtnReq"/>
+      </endButton>
+   </Dialog>
+</core:FragmentDefinition>

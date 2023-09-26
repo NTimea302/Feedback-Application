@@ -1,0 +1,10 @@
+<core:FragmentDefinition
+ xmlns="sap.m"
+ xmlns:core="sap.ui.core">
+ <ResponsivePopover showHeader="false" contentWidth="13rem" contentHeight="4.2rem">
+    <VBox width="100%" alignContent="Center" alignItems="Center">
+        <Button text="{i18n>changePsw}" press = "onChangePasswordClick" icon = "sap-icon://key" width="12rem" type="Accept"/>
+        <Button text="{i18n>logout}" press = ".onLogOut" icon = "sap-icon://log" width="12rem" type="Accept"/>
+    </VBox>
+</ResponsivePopover>
+</core:FragmentDefinition>

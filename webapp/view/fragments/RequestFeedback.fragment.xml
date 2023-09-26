@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+   <Dialog
+      id="idRequestFeedback"
+      title="{i18n>requestFeedbackTitle}">
+      <f:SimpleForm id="idReqFeedback" editable="true">
+            <Label text="{i18n>userLabel}" />
+            <Text text="{Name}"/>
+            <Label text="{i18n>projectLabel}" required="true"/>
+            <ComboBox items="{path: 'EmployeeToPeg', sorter: {path: 'Project_name', descending: true}}" selectedKey="{path: 'Project_name'}" width="100%" enabled="true" editable="true" class="sapUiTinyMarginTop"> 
+               <core:Item key="{Project_id}" text="{Project_name}"/>
+            </ComboBox>  
+      </f:SimpleForm>
+      <beginButton>
+         <Button
+            width="8.5rem"
+            text="{i18n>sendBtn}"
+            icon="sap-icon://accept"
+            type="Accept"
+            press=".onRequestFeedbackBtn"/>
+      </beginButton>
+      <endButton>
+         <Button
+            width="8.5rem"
+            text="{i18n>cancelBtn}"
+            icon="sap-icon://reset"
+            type="Reject"
+            press=".onCancelRequestFeedbackBtn"/>
+      </endButton>
+   </Dialog>
+</core:FragmentDefinition>
